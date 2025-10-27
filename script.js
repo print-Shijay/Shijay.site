@@ -236,3 +236,20 @@ window.addEventListener("keydown", (e) => {
 resetBulPosition();
 window.addEventListener("resize", resetBulPosition);
 update();
+
+// -----------------------
+// Accordion for Education Section
+// -----------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+  const eduCards = document.querySelectorAll(".eduCard");
+
+  eduCards.forEach((card) => {
+    const clickableArea = card.querySelector(".eduInfo");
+    clickableArea.addEventListener("click", () => {
+      if (window.innerWidth <= 768) {
+        card.classList.toggle("active");
+      }
+    });
+  });
+});

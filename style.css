@@ -15,6 +15,27 @@ body {
   font-family: "Nurma", sans-serif;
 }
 
+h1 {
+  font-size: 3.5rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+p,
+h3,
+h4,
+h5,
+h6,
+span {
+  font-size: 1.3rem;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+}
+
 .scroll-down {
   position: absolute;
   bottom: 2rem;
@@ -102,7 +123,7 @@ body {
 /* --- Content Layout --- */
 .content-wrapper {
   display: flex;
-  padding: 5% 15%;
+  margin: 5% 10% 0 15%;
 }
 
 nav {
@@ -112,34 +133,28 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Pushes #top and #icons apart */
-  padding-left: 4rem;
   padding-top: 2rem;
   position: sticky; /* Makes nav stay in place on scroll */
   top: 5vh; /* Aligns it vertically with some margin */
-}
-
-h1 {
-  font-size: 3.5rem;
-  margin: 0;
-}
-
-h2 {
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-p {
-  font-size: 1.5rem;
 }
 
 nav #type {
   font-size: 1.2rem;
 }
 
+nav h2 {
+  color: #ffe066;
+}
+
 nav ul {
   list-style: none; /* Removes bullet points */
   padding: 0;
   margin-top: 3rem;
+}
+
+nav ul li a:hover {
+  color: #ffe066;
+  transition: color 0.3s ease;
 }
 
 nav ul li a {
@@ -149,10 +164,16 @@ nav ul li a {
   line-height: 2;
 }
 
+nav #icons i:hover {
+  color: #ffe066;
+  transition: color 0.3s ease;
+}
+
 nav #icons i {
   font-size: 1.5rem;
   margin-right: 1rem;
   cursor: pointer;
+  color: #cdcdcd;
 }
 #right {
   max-width: 65%;
@@ -165,10 +186,11 @@ section {
 
 .sub-title {
   text-align: center;
+  color: #ffe066;
 }
 #aboutMe p {
   font-size: 1.3em;
-  text-align: right;
+  text-align: justify;
 }
 
 #navContents {
@@ -185,61 +207,154 @@ section {
   font-size: 25px;
 }
 
-#navContents span,
-p {
-  font-size: 20px;
+/* Education Section Styling */
+.education-list {
+  margin-top: 3rem;
+}
+
+.eduCard {
+  display: grid;
+  grid-template-columns: 150px 2px 1fr; /* Date width, line width, info width */
+  gap: 1rem; /* Gap between columns */
+  margin-bottom: 3rem; /* Space between each education entry */
+  position: relative;
+}
+
+.eduCard:hover .timeline-line::before {
+  background-color: #fff; /* Highlight dot on hover */
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.eduCard .date {
+  grid-column: 1;
+  text-align: right;
+  padding-right: 1rem; /* Adjust padding due to gap */
+  position: relative; /* For the dot on the timeline */
+}
+
+.eduCard .date h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  color: #ffe066;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.eduCard .timeline-line {
+  grid-column: 2;
+  background-color: #555;
+  position: relative;
+}
+
+/* Dot on the timeline */
+.eduCard .timeline-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #ffe066;
+  border-radius: 50%;
+  border: 2px solid #000;
+  box-shadow: 0 0 0 2px #ffe066;
+  margin-top: 0.25rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+.eduCard .eduInfo {
+  grid-column: 3;
+  /* Each eduInfo will occupy the same grid column, so they will stack naturally */
+  padding-left: 1rem; /* Adjust padding due to gap */
+}
+
+.eduCard .eduInfo:not(:last-child) {
+  margin-bottom: 2rem; /* Space between multiple eduInfo blocks within one eduCard */
+}
+
+.eduCard .eduInfo h4 {
+  font-size: 1.2rem;
+  color: #cdcdcd;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.eduCard .eduInfo h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease; /* Smooth transition for hover */
+}
+
+.eduCard:hover .eduInfo h3 {
+  color: #ffe066; /* Highlight title on hover */
+}
+
+.eduCard .eduInfo p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #aaa;
+  margin-bottom: 1.5rem;
+}
+
+.eduCard .eduLinks {
+  display: flex;
+  flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.eduCard .eduLinks .link {
+  color: #ffe066;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ffe066;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.eduCard .eduLinks .link:hover {
+  background-color: #ffe066;
+  color: #000;
 }
 
 /* --- Responsive Breakpoints --- */
 
-/* Small devices (phones, portrait) */
-@media (max-width: 575.98px) {
-  .scroll-down {
-    font-size: 10px;
-  }
-  #bulbContainer {
-    width: 20px;
-    height: 20px;
-    padding: 10px;
-  }
-  #maskText,
-  .text-outline {
-    font-size: 16vw;
-  }
-
-  nav {
-    display: none;
-  }
-
-  #right {
-    max-width: 100%;
-    margin-left: 0;
-  }
-
-  #aboutMe {
-    padding: 0;
-  }
-
-  #aboutMe p {
-    font-size: 10px;
-    padding: 0;
-    text-align: justify;
-  }
-
-  #navContents {
-    display: block;
-  }
+/* Medium devices (tablets, landscape) and smaller */
+@media (max-width: 768px) {
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 0;
   }
-  .sub-title {
-    margin-top: 5rem;
+  .scroll-down span {
+    font-size: 15px;
   }
-}
-
-/* Medium devices (tablets, landscape) */
-@media (min-width: 576px) and (max-width: 767.98px) {
+  /* Adjustments for smallest screens */
+  @media (max-width: 575.98px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+    .scroll-down span {
+      font-size: 10px;
+    }
+    #bulbContainer {
+      width: 20px;
+      height: 20px;
+      padding: 10px;
+    }
+    #maskText,
+    .text-outline {
+      font-size: 16vw;
+    }
+    #aboutMe p {
+      font-size: 10px;
+      padding: 0;
+    }
+  }
   #bulbContainer {
     width: 40px;
     height: 40px;
@@ -249,12 +364,13 @@ p {
     font-size: 14vw;
   }
   .content-wrapper {
-    padding: 5% 5%;
+    margin: 5% 5%;
   }
 
   nav {
     display: none;
   }
+
   #right {
     max-width: 100%;
     margin-left: 0;
@@ -267,41 +383,140 @@ p {
   #aboutMe p {
     font-size: 15px;
     padding: 0;
-    text-align: justify;
   }
 
   #navContents {
     display: block;
   }
-  h2 {
-    font-size: 1.8rem;
-    margin: 0;
+
+  /* Education Section Responsive */
+  .eduCard {
+    display: block; /* Revert to block layout for stacking */
   }
+
+  .eduCard .eduInfo {
+    position: relative;
+    padding-right: 2rem; /* Space for the arrow */
+  }
+
+  /* Arrow indicator for dropdown */
+  .eduCard .eduInfo::after {
+    content: "\25BC"; /* Downward-pointing triangle */
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    font-size: 1rem;
+    color: #cdcdcd;
+    transition: transform 0.3s ease-out;
+  }
+
+  .eduCard.active .eduInfo::after {
+    transform: rotate(180deg); /* Point arrow up when active */
+  }
+
+  /* Hide details by default on mobile */
+  .edu-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    padding-top: 0;
+  }
+
+  .eduCard .date {
+    width: auto; /* Remove fixed width */
+    text-align: left;
+    padding-right: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  .eduCard .date h3 {
+    font-size: 1.2rem;
+  }
+
+  .eduCard .timeline-line {
+    width: 100%; /* Make it horizontal */
+    height: 1px;
+    background-color: #555;
+    margin: 0.5rem 0 1.5rem 0;
+  }
+
+  .eduCard .timeline-line::before {
+    display: none; /* Hide the dot */
+  }
+
+  .eduCard .eduInfo {
+    padding-left: 0; /* Reset padding from desktop view */
+    cursor: pointer; /* Indicate it's clickable */
+  }
+
+  /* Show details when .active class is present */
+  .eduCard.active .edu-details {
+    max-height: 500px; /* A large enough value to show all content */
+  }
+
+  .eduCard .eduInfo:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
   .sub-title {
     margin-top: 5rem;
   }
 }
 
 /* Large devices (desktops, small laptops) */
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 769px) and (max-width: 992px) {
+  .scroll-down span {
+    font-size: 15px;
+  }
   #bulbContainer {
-    width: 0px;
-    height: 0px;
+    width: 50px;
+    height: 50px;
   }
   #maskText,
   .text-outline {
     font-size: 12vw;
   }
   .content-wrapper {
-    padding: 5% 5%;
+    margin: 5% 5%;
+  }
+
+  h1 {
+    font-size: 2.3rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+  #aboutMe p {
+    padding: 0 50px 0 50px;
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
+  /* Education Section Responsive */
+  .eduCard .date {
+    width: 120px; /* Slightly smaller width for date column */
+    padding-right: 1.5rem;
+  }
+  .eduCard .date h3 {
+    font-size: 1rem;
+  }
+  .eduCard .eduInfo h4 {
+    font-size: 1.1rem;
+  }
+  .eduCard .eduInfo h3 {
+    font-size: 1.3rem;
   }
 }
 
 /* Extra large devices (large desktops) & up */
-@media (min-width: 992px) {
+@media (min-width: 993px) {
+  .scroll-down span {
+    font-size: 20px;
+  }
   #bulbContainer {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
   #maskText,
   .text-outline {
