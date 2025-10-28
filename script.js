@@ -257,14 +257,14 @@ if (typeof DeviceMotionEvent.requestPermission === "function") {
 }
 
 window.addEventListener("deviceorientation", (event) => {
-  if (event.gamma === null) return; // safety check
+  if (event.gamma === null) return;
 
   const tiltLeftRight = event.gamma;
-  const sensitivity = 0.2;
+  const sensitivity = 0.1;
 
   // Move bulb horizontally based on tilt
   if (!dragging) {
-    velocityX += tiltLeftRight * sensitivity * 0.03;
+    velocityX += tiltLeftRight * sensitivity * 0.01;
     velocityX = clamp(velocityX, -12, 12);
   }
 });
