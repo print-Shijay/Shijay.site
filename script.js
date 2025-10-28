@@ -3,6 +3,7 @@ const bulb = document.getElementById("bulbContainer");
 const ropePath = document.getElementById("ropePath");
 const lightCircle = document.getElementById("lightCircle");
 const textGlowOverlay = document.getElementById("textGlowOverlay");
+const permissionButton = document.getElementById("permissionButton");
 
 let bulbX, bulbY;
 let velocityX = 0,
@@ -78,27 +79,25 @@ function applyBulbState(glowRadius) {
 
 // --- Request permission for iOS Safari and similar ---
 function requestMotionPermission() {
-  if (typeof DeviceOrientationEvent.requestPermission === "function") {
-    DeviceOrientationEvent.requestPermission()
-      .then((response) => {
-        if (response !== "granted") return;
+  DeviceOrientationEvent.requestPermission()
+    .then((response) => {
+      if (response === "granted") {
         console.log("Motion permission granted");
-        // Add the event listener only after permission is granted
         window.addEventListener("deviceorientation", handleOrientation);
-      })
-      .catch(console.error);
-  } else {
-    // For non-iOS devices or older versions, add the listener directly
-    console.log(
-      "DeviceOrientationEvent.requestPermission not found, adding listener directly."
-    );
-    window.addEventListener("deviceorientation", handleOrientation);
-  }
+        permissionButton.style.display = "none"; // Hide button after getting permission
+      } else {
+        console.log("Motion permission denied");
+        alert(
+          "Motion control permission was denied. The tilt feature will not be available."
+        );
+        permissionButton.style.display = "none";
+      }
+    })
+    .catch((error) => {
+      console.error("Error requesting motion permission:", error);
+      permissionButton.style.display = "none";
+    });
 }
-
-document.body.addEventListener("click", requestMotionPermission, {
-  once: true,
-});
 
 // Physics + rendering loop
 function update() {
@@ -262,13 +261,27 @@ function handleOrientation(event) {
 
   // Move bulb horizontally based on tilt
   if (dragging) return;
-  velocityX += tiltLeftRight * sensitivity * 0.01;
+  velocityX += tiltLeftRight * sensitivity * 0.03;
   velocityX = clamp(velocityX, -12, 12);
 }
 
 // Init
 resetBulPosition();
 window.addEventListener("resize", resetBulPosition);
+
+// Check if permission is required and set up the button or listener accordingly
+if (typeof DeviceOrientationEvent.requestPermission === "function") {
+  // This is likely an iOS 13+ device.
+  permissionButton.style.display = "block";
+  permissionButton.addEventListener("click", requestMotionPermission);
+} else {
+  // For non-iOS devices or older versions, add the listener directly
+  console.log(
+    "DeviceOrientationEvent.requestPermission not found, adding listener directly."
+  );
+  window.addEventListener("deviceorientation", handleOrientation);
+}
+
 update();
 
 // -----------------------

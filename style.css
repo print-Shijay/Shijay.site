@@ -74,6 +74,30 @@ span {
 .stage {
   height: 100vh;
   overflow: hidden; /* Prevents horizontal scrolling from SVG content */
+  position: relative; /* Needed for absolute positioning of the button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#permissionButton {
+  position: absolute;
+  z-index: 20;
+  padding: 1rem 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  color: #000;
+  background-color: #ffe066;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#permissionButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Ensure SVG takes full block-level width, ignoring scrollbar space */
