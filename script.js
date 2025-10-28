@@ -76,6 +76,25 @@ function applyBulbState(glowRadius) {
   }
 }
 
+// --- Request permission for iOS Safari and similar ---
+function requestMotionPermission() {
+  if (typeof DeviceOrientationEvent.requestPermission === "function") {
+    DeviceOrientationEvent.requestPermission()
+      .then((response) => {
+        if (response === "granted") {
+          console.log("Motion permission granted");
+        } else {
+          alert("Motion permission denied");
+        }
+      })
+      .catch(console.error);
+  }
+}
+
+document.body.addEventListener("click", requestMotionPermission, {
+  once: true,
+});
+
 // Physics + rendering loop
 function update() {
   const ropeTopX = getRopeTopX();
@@ -230,9 +249,41 @@ window.addEventListener("keydown", (e) => {
   if (e.code === "Space") toggleBulb();
 });
 
+// Request permission for iOS
+if (typeof DeviceMotionEvent.requestPermission === "function") {
+  document.body.addEventListener("click", () => {
+    DeviceMotionEvent.requestPermission().catch(console.error);
+  });
+}
+
+window.addEventListener("deviceorientation", (event) => {
+  console.log(
+    "gamma:",
+    event.gamma,
+    "beta:",
+    event.beta,
+    "alpha:",
+    event.alpha
+  );
+});
+
 // -----------------------
+// Device Orientation Control (Gyroscope)
+// -----------------------
+window.addEventListener("deviceorientation", (event) => {
+  if (event.gamma === null) return; // safety check
+
+  const tiltLeftRight = event.gamma; // -90 (left) to +90 (right)
+  const sensitivity = 0.5; // adjust for strength
+
+  // Move bulb horizontally based on tilt
+  if (!dragging) {
+    velocityX += tiltLeftRight * sensitivity * 0.03;
+    velocityX = clamp(velocityX, -12, 12);
+  }
+});
+
 // Init
-// -----------------------
 resetBulPosition();
 window.addEventListener("resize", resetBulPosition);
 update();
