@@ -82,22 +82,24 @@ span {
 
 #permissionButton {
   position: absolute;
+  top: 20px;
+  left: 20px;
   z-index: 20;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   font-family: "Montserrat", sans-serif;
-  font-size: 1.1rem;
-  color: #000;
-  background-color: #ffe066;
-  border: none;
-  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #cdcdcd;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #555;
+  border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #permissionButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background-color: #ffe066;
+  color: #000;
+  border-color: #ffe066;
 }
 
 /* Ensure SVG takes full block-level width, ignoring scrollbar space */

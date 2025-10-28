@@ -9,15 +9,15 @@ let bulbX, bulbY;
 let velocityX = 0,
   velocityY = 0;
 
-const gravity = 0.3; // lower gravity = slower fall, feels heavier
-const stiffness = 0.015; // less tension = softer rope, smoother motion
-const damping = 0.9; // more damping = less bounce and faster settling
+const gravity = 0.3;
+const stiffness = 0.015;
+const damping = 0.9;
 
 let dragging = false;
 let lastX = null,
   lastY = null;
 
-let bulbOn = false; // start off
+let bulbOn = false;
 let lastToggleTime = 0;
 
 // Rope top anchor (ceiling)
@@ -77,14 +77,14 @@ function applyBulbState(glowRadius) {
   }
 }
 
-// --- Request permission for iOS Safari and similar ---
+//Request permission for iOS Safari and similar
 function requestMotionPermission() {
   DeviceOrientationEvent.requestPermission()
     .then((response) => {
       if (response === "granted") {
         console.log("Motion permission granted");
         window.addEventListener("deviceorientation", handleOrientation);
-        permissionButton.style.display = "none"; // Hide button after getting permission
+        permissionButton.style.display = "none";
       } else {
         console.log("Motion permission denied");
         alert(
@@ -276,9 +276,13 @@ if (typeof DeviceOrientationEvent.requestPermission === "function") {
   permissionButton.addEventListener("click", requestMotionPermission);
 } else {
   // For non-iOS devices or older versions, add the listener directly
-  console.log(
-    "DeviceOrientationEvent.requestPermission not found, adding listener directly."
-  );
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  if (!isTouchDevice) {
+    alert("Tilt feature not supported on desktop devices.");
+  }
+
   window.addEventListener("deviceorientation", handleOrientation);
 }
 
