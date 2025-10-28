@@ -257,24 +257,10 @@ if (typeof DeviceMotionEvent.requestPermission === "function") {
 }
 
 window.addEventListener("deviceorientation", (event) => {
-  console.log(
-    "gamma:",
-    event.gamma,
-    "beta:",
-    event.beta,
-    "alpha:",
-    event.alpha
-  );
-});
-
-// -----------------------
-// Device Orientation Control (Gyroscope)
-// -----------------------
-window.addEventListener("deviceorientation", (event) => {
   if (event.gamma === null) return; // safety check
 
-  const tiltLeftRight = event.gamma; // -90 (left) to +90 (right)
-  const sensitivity = 0.5; // adjust for strength
+  const tiltLeftRight = event.gamma;
+  const sensitivity = 0.2;
 
   // Move bulb horizontally based on tilt
   if (!dragging) {
