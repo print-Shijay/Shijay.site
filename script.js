@@ -81,13 +81,18 @@ function requestMotionPermission() {
   if (typeof DeviceOrientationEvent.requestPermission === "function") {
     DeviceOrientationEvent.requestPermission()
       .then((response) => {
-        if (response === "granted") {
-          console.log("Motion permission granted");
-        } else {
-          alert("Motion permission denied");
-        }
+        if (response !== "granted") return;
+        console.log("Motion permission granted");
+        // Add the event listener only after permission is granted
+        window.addEventListener("deviceorientation", handleOrientation);
       })
       .catch(console.error);
+  } else {
+    // For non-iOS devices or older versions, add the listener directly
+    console.log(
+      "DeviceOrientationEvent.requestPermission not found, adding listener directly."
+    );
+    window.addEventListener("deviceorientation", handleOrientation);
   }
 }
 
@@ -249,25 +254,17 @@ window.addEventListener("keydown", (e) => {
   if (e.code === "Space") toggleBulb();
 });
 
-// Request permission for iOS
-if (typeof DeviceMotionEvent.requestPermission === "function") {
-  document.body.addEventListener("click", () => {
-    DeviceMotionEvent.requestPermission().catch(console.error);
-  });
-}
-
-window.addEventListener("deviceorientation", (event) => {
+function handleOrientation(event) {
   if (event.gamma === null) return;
 
   const tiltLeftRight = event.gamma;
   const sensitivity = 0.1;
 
   // Move bulb horizontally based on tilt
-  if (!dragging) {
-    velocityX += tiltLeftRight * sensitivity * 0.01;
-    velocityX = clamp(velocityX, -12, 12);
-  }
-});
+  if (dragging) return;
+  velocityX += tiltLeftRight * sensitivity * 0.01;
+  velocityX = clamp(velocityX, -12, 12);
+}
 
 // Init
 resetBulPosition();
