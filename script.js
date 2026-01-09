@@ -3,20 +3,21 @@ const bulb = document.getElementById("bulbContainer");
 const ropePath = document.getElementById("ropePath");
 const lightCircle = document.getElementById("lightCircle");
 const textGlowOverlay = document.getElementById("textGlowOverlay");
+const permissionButton = document.getElementById("permissionButton");
 
 let bulbX, bulbY;
 let velocityX = 0,
   velocityY = 0;
 
-const gravity = 0.3; // lower gravity = slower fall, feels heavier
-const stiffness = 0.015; // less tension = softer rope, smoother motion
-const damping = 0.9; // more damping = less bounce and faster settling
+const gravity = 0.3;
+const stiffness = 0.015;
+const damping = 0.9;
 
 let dragging = false;
 let lastX = null,
   lastY = null;
 
-let bulbOn = false; // start off
+let bulbOn = false;
 let lastToggleTime = 0;
 
 // Rope top anchor (ceiling)
@@ -74,6 +75,28 @@ function applyBulbState(glowRadius) {
     ropePath.style.stroke = "#555"; // dim rope
     ropePath.style.filter = "none";
   }
+}
+
+//Request permission for iOS Safari and similar
+function requestMotionPermission() {
+  DeviceOrientationEvent.requestPermission()
+    .then((response) => {
+      if (response === "granted") {
+        console.log("Motion permission granted");
+        window.addEventListener("deviceorientation", handleOrientation);
+        permissionButton.style.display = "none";
+      } else {
+        console.log("Motion permission denied");
+        alert(
+          "Motion control permission was denied. The tilt feature will not be available."
+        );
+        permissionButton.style.display = "none";
+      }
+    })
+    .catch((error) => {
+      console.error("Error requesting motion permission:", error);
+      permissionButton.style.display = "none";
+    });
 }
 
 // Physics + rendering loop
@@ -230,11 +253,39 @@ window.addEventListener("keydown", (e) => {
   if (e.code === "Space") toggleBulb();
 });
 
-// -----------------------
+function handleOrientation(event) {
+  if (event.gamma === null) return;
+
+  const tiltLeftRight = event.gamma;
+  const sensitivity = 0.1;
+
+  // Move bulb horizontally based on tilt
+  if (dragging) return;
+  velocityX += tiltLeftRight * sensitivity * 0.03;
+  velocityX = clamp(velocityX, -12, 12);
+}
+
 // Init
-// -----------------------
 resetBulPosition();
 window.addEventListener("resize", resetBulPosition);
+
+// Check if permission is required and set up the button or listener accordingly
+if (typeof DeviceOrientationEvent.requestPermission === "function") {
+  // This is likely an iOS 13+ device.
+  permissionButton.style.display = "block";
+  permissionButton.addEventListener("click", requestMotionPermission);
+} else {
+  // For non-iOS devices or older versions, add the listener directly
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  if (!isTouchDevice) {
+    alert("Tilt feature not supported on desktop devices.");
+  }
+
+  window.addEventListener("deviceorientation", handleOrientation);
+}
+
 update();
 
 // -----------------------

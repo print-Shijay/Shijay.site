@@ -74,6 +74,32 @@ span {
 .stage {
   height: 100vh;
   overflow: hidden; /* Prevents horizontal scrolling from SVG content */
+  position: relative; /* Needed for absolute positioning of the button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#permissionButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
+  padding: 0.5rem 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: #cdcdcd;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #555;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#permissionButton:hover {
+  background-color: #ffe066;
+  color: #000;
+  border-color: #ffe066;
 }
 
 /* Ensure SVG takes full block-level width, ignoring scrollbar space */
@@ -128,7 +154,7 @@ span {
 .content-wrapper {
   display: flex;
   margin: 5% 10% 0 15%;
-  position: relative; /* Needed for z-index context */
+  position: relative;
 }
 
 nav {
@@ -137,11 +163,11 @@ nav {
   min-width: 30%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Pushes #top and #icons apart */
+  justify-content: space-between;
   padding-top: 2rem;
-  z-index: 2; /* Ensure nav is above particles */
-  position: sticky; /* Makes nav stay in place on scroll */
-  top: 5vh; /* Aligns it vertically with some margin */
+  z-index: 2;
+  position: sticky;
+  top: 5vh;
 }
 
 nav #type {
@@ -153,7 +179,7 @@ nav h2 {
 }
 
 nav ul {
-  list-style: none; /* Removes bullet points */
+  list-style: none;
   padding: 0;
   margin-top: 3rem;
 }
@@ -184,7 +210,7 @@ nav #icons i {
 #right {
   max-width: 65%;
   margin-left: 5%;
-  z-index: 2; /* Ensure content is above particles */
+  z-index: 2;
 }
 section {
   min-height: 50vh;
@@ -214,29 +240,28 @@ section {
   font-size: 25px;
 }
 
-/* Education Section Styling */
 .education-list {
   margin-top: 3rem;
 }
 
 .eduCard {
   display: grid;
-  grid-template-columns: 150px 2px 1fr; /* Date width, line width, info width */
-  gap: 1rem; /* Gap between columns */
-  margin-bottom: 3rem; /* Space between each education entry */
+  grid-template-columns: 150px 2px 1fr;
+  gap: 1rem;
+  margin-bottom: 3rem;
   position: relative;
 }
 
 .eduCard:hover .timeline-line::before {
-  background-color: #fff; /* Highlight dot on hover */
+  background-color: #fff;
   box-shadow: 0 0 0 2px #fff;
 }
 
 .eduCard .date {
   grid-column: 1;
   text-align: right;
-  padding-right: 1rem; /* Adjust padding due to gap */
-  position: relative; /* For the dot on the timeline */
+  padding-right: 1rem;
+  position: relative;
 }
 
 .eduCard .date h3 {
@@ -273,12 +298,11 @@ section {
 
 .eduCard .eduInfo {
   grid-column: 3;
-  /* Each eduInfo will occupy the same grid column, so they will stack naturally */
-  padding-left: 1rem; /* Adjust padding due to gap */
+  padding-left: 1rem;
 }
 
 .eduCard .eduInfo:not(:last-child) {
-  margin-bottom: 2rem; /* Space between multiple eduInfo blocks within one eduCard */
+  margin-bottom: 2rem;
 }
 
 .eduCard .eduInfo h4 {
@@ -293,11 +317,11 @@ section {
   color: #fff;
   margin-top: 0;
   margin-bottom: 1rem;
-  transition: color 0.3s ease; /* Smooth transition for hover */
+  transition: color 0.3s ease;
 }
 
 .eduCard:hover .eduInfo h3 {
-  color: #ffe066; /* Highlight title on hover */
+  color: #ffe066;
 }
 
 .eduCard .eduInfo p {
@@ -309,7 +333,7 @@ section {
 
 .eduCard .eduLinks {
   display: flex;
-  flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+  flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
 }
