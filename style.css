@@ -571,7 +571,18 @@ section {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #444;
+}
+
+.dots span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.dots span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.dots span:nth-child(3) {
+  background: #28c940;
 }
 
 .url-bar {
