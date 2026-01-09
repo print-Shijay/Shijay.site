@@ -1,0 +1,47 @@
+{
+  "educircle": {
+    "title": "EduCircle",
+    "description": "EduCircle is a collaborative platform where students and educators can join groups to study and work together. Users can post and interact in a dynamic newsfeed, authenticate via email, and receive certificates as PDFs through email.",
+    "tech": ["HTML", "CSS", "JavaScript", "Bootstrap", "PHP", "MySQL"],
+    "link": "https://educircle.online",
+    "path": "assets/project.png",
+    "Features": [
+      "User Login and Registration",
+      "2 Authentication Methods (Email Verification)",
+      "Dynamic Newsfeed",
+      "Group Study Sessions",
+      "PDF Certificate Generation",
+      "Email Notifications",
+      "Calendar Streaks",
+      "Exp and Leveling System"
+    ]
+  },
+
+  "kireitours": {
+    "title": "KireiTours",
+    "description": "Kirei Tours is a user-friendly web app where users can easily book tours and plan trips. The platform also emphasizes accessibility, ensuring everyone can navigate and use the site smoothly, while subtle GSAP animations enhance the interactive experience.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+      "GSAP",
+      "PHP",
+      "Laravel",
+      "Blade",
+      "MySQL"
+    ],
+    "link": "https://kireitours.asia",
+    "path": "assets/project.png",
+    "Features": [
+      "User Login and Registration (Google and Facebook OAuth)",
+      "User Authentication and Authorization",
+      "Dynamic Booking System",
+      "Sessions Handling",
+      "Payment Gateway Integration(Sandbox)",
+      "Calendar Scheduling",
+      "Accessibility Features",
+      "GSAP Animations (Simple)"
+    ]
+  }
+}
