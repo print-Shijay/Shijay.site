@@ -352,7 +352,293 @@ section {
   background-color: #ffe066;
   color: #000;
 }
+/* --- Project --- */
+/* Custom Project Layout */
+.project-card-custom {
+  display: flex;
+  align-items: center; /* Centers items vertically */
+  padding: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
 
+.project-card-custom:hover {
+  transform: translateX(10px);
+}
+
+/* Image Styling - Slightly larger to balance the text */
+.project-image-wrapper {
+  width: 140px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* The Vertical Line Separator */
+.project-divider {
+  width: 4px;
+  align-self: stretch; /* Makes line match the height of the text content */
+  background-color: #ffe066;
+  margin: 0 30px;
+  border-radius: 2px;
+}
+
+/* Content Styling */
+.project-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-content .card-title {
+  margin-bottom: 4px;
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+.project-card-custom:hover .project-content .card-title {
+  color: #ffe066; /* choose any color you want */
+}
+
+/* Description Styling */
+.project-description {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  max-width: 400px; /* Prevents text from stretching too far */
+  color: #aaaaaa;
+}
+
+.tech-stack i {
+  font-size: 1.1rem;
+  margin-right: 12px;
+  color: #777;
+}
+
+/* Interaction: Divider glows on hover */
+.project-card-custom:hover .project-divider {
+  box-shadow: 0 0 10px rgba(255, 224, 102, 0.6);
+}
+
+/* --- End of Project --- */
+/* Dark Modal Base */
+.project-modal-dark {
+  background-color: #000 !important;
+  border: 1px solid #333; /* Very subtle border */
+  border-radius: 0px; /* Sharp edges for minimalist feel */
+  height: 80vh;
+  overflow: hidden;
+}
+
+/* Vertical Line / Preview Pane */
+.preview-pane {
+  border-left: 1px solid #ffe066; /* Thin, elegant yellow line */
+  background-color: #080808;
+  position: relative;
+}
+
+/* Custom Button */
+.btn-minimal {
+  color: #ffe066;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ffe066;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn-minimal:hover {
+  color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+/* Tech Icons */
+#modalTech i {
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+}
+
+#modalTech i:hover {
+  color: #ffe066;
+  transform: translateY(-3px);
+}
+
+/* Custom Close Button */
+.btn-close-custom {
+  position: absolute;
+  bottom: 40px;
+  left: 50px;
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn-close-custom:hover {
+  color: #ffe066;
+}
+
+/* iframe styling */
+.preview-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(
+    20%
+  ); /* Optional: mutes colors slightly to match dark theme */
+}
+
+.preview-img-fallback {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Feature Tag Styling */
+.feature-tag {
+  font-size: 0.75rem;
+  color: #cdcdcd;
+  border: 1px solid #333;
+  padding: 5px 12px;
+  border-radius: 4px; /* Slight roundness for a modern feel */
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.feature-tag:hover {
+  border-color: #ffe066;
+  color: #ffe066;
+}
+
+/* Modal and Layout Defaults */
+.project-modal-dark {
+  background-color: #2e2e2e !important;
+  border: none;
+  border-radius: 10px;
+  height: 85vh;
+}
+
+.preview-pane {
+  border-left: 1px solid #ffe066;
+  background-color: #080808;
+}
+
+.btn-minimal {
+  color: #ffe066;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-bottom: 2px solid #ffe066;
+  padding-bottom: 4px;
+}
+
+.btn-close-custom {
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+}
+
+/* Application Header Styling */
+.mac-header {
+  height: 42px;
+  background: #2e2e2e;
+  border-bottom: 1px solid #222;
+  z-index: 10;
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer; /* Indicates they are functional */
+  transition: opacity 0.2s;
+}
+
+.dot:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.red {
+  background: #ff5f56;
+  position: relative;
+}
+/* Adding an 'x' on hover like real macOS */
+.red:hover::after {
+  content: "×";
+  color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.yellow {
+  background: #ffbd2e;
+  cursor: default;
+}
+.green {
+  background: #27c93f;
+  cursor: default;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #666; /* Muted gray by default */
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.header-link:hover {
+  color: #ffe066; /* Your main color on hover */
+}
+
+/* Modal Core */
+.project-modal-dark {
+  background-color: #000 !important;
+  border: 1px solid #333;
+  border-radius: 12px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.preview-pane {
+  border-left: 1px solid #ffe066;
+  background-color: #000;
+}
+
+.preview-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
 /* --- Responsive Breakpoints --- */
 
 /* Medium devices (tablets, landscape) and smaller */

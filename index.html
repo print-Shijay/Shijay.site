@@ -32,8 +32,11 @@
 
     <!-- icon -->
     <link rel="icon" href="assets/fav-ico.ico" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="style.css" />
     <link
       rel="preload"
       href="fonts/nurma-regular.woff2"
@@ -49,6 +52,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="style.css" />
     <title>Shijay</title>
   </head>
   <body>
@@ -317,11 +321,221 @@
           </div>
         </section>
 
-        <section id="projects">
-          <h2 class="sub-title">Featured Projects</h2>
+        <section id="projects" class="container my-5">
+          <h2 class="sub-title mb-4">Featured Projects</h2>
+
+          <div class="row g-4">
+            <!-- Project Card -->
+            <div class="col-lg-6 col-md-12">
+              <div
+                class="project-card-custom"
+                data-bs-toggle="modal"
+                data-bs-target="#projectModal"
+                data-project="educircle"
+              >
+                <div class="project-image-wrapper">
+                  <img
+                    src="assets/project.png"
+                    alt="EduCircle"
+                    class="project-img"
+                  />
+                </div>
+
+                <div class="project-divider"></div>
+
+                <div class="project-content">
+                  <h5 class="card-title fw-bold">EduCircle</h5>
+
+                  <p class="project-description mb-2">
+                    EduCircle is a Web Application designed to help users to
+                    find their <b>circle</b> to studied with.
+                  </p>
+
+                  <div class="tech-stack">
+                    <i class="fa-brands fa-html5"></i>
+                    <i class="fa-brands fa-css3-alt"></i>
+                    <i class="fa-brands fa-js"></i>
+                    <i class="fa-brands fa-bootstrap"></i>
+                    <i class="fa-brands fa-php"></i>
+                    <i class="fa-solid fa-database"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Duplicate this block for other projects -->
+          </div>
         </section>
       </div>
     </main>
+
+    <!-- Project Modal -->
+    <div class="modal fade" id="projectModal" tabindex="-1">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content project-modal-dark">
+          <div class="mac-header d-flex align-items-center px-3">
+            <div class="traffic-lights d-flex gap-2">
+              <span class="dot red" data-bs-dismiss="modal"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+
+            <div class="app-title ms-4">
+              <a id="modalAppTitleLink" href="#" class="header-link">
+                <span id="modalAppTitle"></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="row g-0 flex-grow-1 overflow-hidden">
+            <div class="col-lg-5 p-5 d-flex flex-column justify-content-center">
+              <div class="mb-2">
+                <span
+                  class="text-uppercase"
+                  style="
+                    color: #ffe066;
+                    font-size: 0.7rem;
+                    letter-spacing: 3px;
+                    font-weight: 800;
+                  "
+                  >Featured Project</span
+                >
+                <h1
+                  id="modalTitle"
+                  class="display-5 fw-bold mt-1"
+                  style="color: #ffffff"
+                ></h1>
+              </div>
+
+              <p
+                id="modalDescription"
+                class="mt-2 mb-4"
+                style="color: #cdcdcd; line-height: 1.6; font-size: 0.95rem"
+              ></p>
+
+              <div
+                class="tech-stack-label mb-3"
+                style="
+                  color: #ffe066;
+                  font-size: 0.75rem;
+                  font-weight: 700;
+                  letter-spacing: 1px;
+                "
+              >
+                TECHNOLOGIES
+              </div>
+              <div
+                id="modalTech"
+                class="d-flex flex-wrap gap-3 mb-4"
+                style="color: #ffffff"
+              ></div>
+
+              <div
+                class="tech-stack-label mb-3"
+                style="
+                  color: #ffe066;
+                  font-size: 0.75rem;
+                  font-weight: 700;
+                  letter-spacing: 1px;
+                "
+              >
+                KEY FEATURES
+              </div>
+              <div id="modalFeatures" class="d-flex flex-wrap gap-2 mb-5"></div>
+
+              <div class="mt-2">
+                <a id="modalLink" href="#" target="_blank" class="btn-minimal"
+                  >LIVE PREVIEW <span>→</span></a
+                >
+              </div>
+            </div>
+
+            <div class="col-lg-7 preview-pane">
+              <div id="previewContainer" class="h-100 w-100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let projectsData = {};
+
+      fetch("data/projects.json")
+        .then((res) => res.json())
+        .then((data) => (projectsData = data));
+
+      function getIcon(tech) {
+        const icons = {
+          html: "fa-brands fa-html5",
+          css: "fa-brands fa-css3-alt",
+          javascript: "fa-brands fa-js",
+          bootstrap: "fa-brands fa-bootstrap",
+          php: "fa-brands fa-php",
+          mysql: "fa-solid fa-database",
+          laravel: "fa-brands fa-laravel",
+          blade: "fa-solid fa-file-code",
+          gsap: "fa-solid fa-magic",
+        };
+        return icons[tech.toLowerCase()] || "fa-solid fa-code";
+      }
+
+      const projectModal = document.getElementById("projectModal");
+
+      projectModal.addEventListener("show.bs.modal", function (event) {
+        const card = event.relatedTarget;
+        const projectKey = card.getAttribute("data-project");
+        const project = projectsData[projectKey];
+
+        if (!project) return;
+
+        // Header Updates
+        document.getElementById("modalAppTitle").textContent = project.title;
+        document.getElementById("modalAppTitleLink").href = project.link || "#";
+
+        // Body Content Updates
+        document.getElementById("modalTitle").textContent = project.title;
+        document.getElementById("modalDescription").textContent =
+          project.description;
+        document.getElementById("modalLink").href = project.link || "#";
+
+        // Tech Icons
+        const techBox = document.getElementById("modalTech");
+        techBox.innerHTML = "";
+        project.tech.forEach((t) => {
+          const i = document.createElement("i");
+          i.className = getIcon(t);
+          i.style.fontSize = "1.3rem";
+          techBox.appendChild(i);
+        });
+
+        // Feature Tags
+        const featuresBox = document.getElementById("modalFeatures");
+        featuresBox.innerHTML = "";
+        if (project.Features) {
+          project.Features.forEach((feature) => {
+            const span = document.createElement("span");
+            span.className = "feature-tag";
+            span.textContent = feature;
+            featuresBox.appendChild(span);
+          });
+        }
+
+        // Preview Handling
+        const preview = document.getElementById("previewContainer");
+        preview.innerHTML = "";
+
+        if (project.link && project.link !== "#") {
+          const iframe = document.createElement("iframe");
+          iframe.src = project.link;
+          iframe.className = "preview-iframe w-100 h-100";
+          iframe.style.border = "none";
+          preview.appendChild(iframe);
+        } else {
+          // Fallback image if no link
+          preview.innerHTML = `<img src="${project.path}" style="width:100%; height:100%; object-fit:cover;">`;
+        }
+      });
+    </script>
 
     <script
       defer
@@ -331,5 +545,6 @@
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
