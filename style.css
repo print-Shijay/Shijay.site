@@ -128,6 +128,7 @@ span {
 .content-wrapper {
   display: flex;
   margin: 5% 10% 0 15%;
+  position: relative; /* Needed for z-index context */
 }
 
 nav {
@@ -138,6 +139,7 @@ nav {
   flex-direction: column;
   justify-content: space-between; /* Pushes #top and #icons apart */
   padding-top: 2rem;
+  z-index: 2; /* Ensure nav is above particles */
   position: sticky; /* Makes nav stay in place on scroll */
   top: 5vh; /* Aligns it vertically with some margin */
 }
@@ -182,6 +184,7 @@ nav #icons i {
 #right {
   max-width: 65%;
   margin-left: 5%;
+  z-index: 2; /* Ensure content is above particles */
 }
 section {
   min-height: 50vh;
@@ -465,6 +468,58 @@ section {
   .sub-title {
     margin-top: 5rem;
   }
+}
+
+/* --- Projects Section --- */
+#projects {
+  text-align: center;
+}
+
+.construction-container {
+  border: 2px dashed #555;
+  border-radius: 10px;
+  padding: 3rem 2rem;
+  margin-top: 3rem;
+  background-color: rgba(
+    34,
+    34,
+    34,
+    0.5
+  ); /* Slightly transparent dark background */
+  position: relative;
+  overflow: hidden;
+}
+
+.construction-icon {
+  font-size: 4rem;
+  color: #ffe066;
+  margin-bottom: 1.5rem;
+  animation: spin 10s linear infinite;
+}
+
+.construction-container h3 {
+  font-family: "Nurma", sans-serif;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
 }
 
 /* Large devices (desktops, small laptops) */
