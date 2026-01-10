@@ -107,14 +107,16 @@ document.querySelectorAll(".eduCard").forEach((card) => {
 ================================ */
 document.querySelectorAll(".project-card-custom").forEach((card, i) => {
   // Scroll reveal
+
   gsap.from(card, {
     scrollTrigger: {
       trigger: card,
       start: "top 85%",
+      toggleActions: "play none none reverse",
     },
-    y: 40,
-    x: i % 2 === 0 ? -20 : 20,
+    y: 50,
     opacity: 0,
+    scale: 0.97,
     duration: 0.9,
     ease: "power3.out",
   });
