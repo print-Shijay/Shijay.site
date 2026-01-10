@@ -441,9 +441,9 @@ section {
   box-sizing: border-box;
 }
 
-.project-card-custom:hover {
+/* .project-card-custom:hover {
   transform: translateX(10px);
-}
+} */
 
 /* Image Styling - Slightly larger to balance the text */
 .project-image-wrapper {

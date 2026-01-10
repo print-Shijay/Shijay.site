@@ -88,7 +88,51 @@ document.querySelectorAll(".skill-fill").forEach((bar) => {
 /* ================================
    EDUCATION CARDS
 ================================ */
+document.querySelectorAll(".eduCard").forEach((card) => {
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%",
+      toggleActions: "play none none reverse",
+    },
+    y: 40,
+    opacity: 0,
+    duration: 0.9,
+    ease: "power3.out",
+  });
+});
 
 /* ================================
    PROJECT CARDS
 ================================ */
+document.querySelectorAll(".project-card-custom").forEach((card, i) => {
+  // Scroll reveal
+  gsap.from(card, {
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%",
+    },
+    y: 40,
+    x: i % 2 === 0 ? -20 : 20,
+    opacity: 0,
+    duration: 0.9,
+    ease: "power3.out",
+  });
+
+  // Hover animation
+  card.addEventListener("mouseenter", () => {
+    gsap.to(card, {
+      x: "+=10",
+      duration: 0.1,
+      ease: "power2.out",
+    });
+  });
+
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, {
+      x: 0,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  });
+});
