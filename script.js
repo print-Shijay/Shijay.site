@@ -441,14 +441,26 @@ projectModal.addEventListener("show.bs.modal", function (event) {
   const preview = document.getElementById("previewContainer");
   preview.innerHTML = "";
 
-  if (project.link && project.link !== "#") {
-    const iframe = document.createElement("iframe");
-    iframe.src = project.link;
-    iframe.className = "preview-iframe w-100 h-100";
-    iframe.style.border = "none";
-    preview.appendChild(iframe);
-  } else {
-    // Fallback image if no link
-    preview.innerHTML = `<img src="${project.path}" style="width:100%; height:100%; object-fit:contain; display:block; margin:auto;">`;
+  async function checkAndLoadPreview(link, path) {
+    if (link && link !== "#") {
+      try {
+        const response = await fetch(link, { method: "HEAD", mode: "no-cors" });
+        // If fetch succeeds, use iframe
+        const iframe = document.createElement("iframe");
+        iframe.src = link;
+        iframe.className = "preview-iframe w-100 h-100";
+        iframe.style.border = "none";
+        preview.appendChild(iframe);
+      } catch (error) {
+        // If fetch fails (network error, invalid link), fallback to image
+        preview.innerHTML = `<img src="${path}" style="width:100%; height:100%; object-fit:contain; display:block; margin:auto;">`;
+      }
+    } else {
+      // If no link, fallback to image
+      preview.innerHTML = `<img src="${path}" style="width:100%; height:100%; object-fit:contain; display:block; margin:auto;">`;
+    }
   }
+
+  // Call the async function
+  checkAndLoadPreview(project.link, project.path);
 });
