@@ -5,6 +5,18 @@ const lightCircle = document.getElementById("lightCircle");
 const textGlowOverlay = document.getElementById("textGlowOverlay");
 const permissionButton = document.getElementById("permissionButton");
 
+function showTiltWarning(message) {
+  const warning = document.getElementById("tiltWarning");
+  const messageBox = document.getElementById("tiltWarningMessage");
+
+  messageBox.textContent = message;
+  warning.style.display = "block";
+  warning.classList.add("show");
+}
+
+// -----------------------
+// Physics Variables
+// -----------------------
 let bulbX, bulbY;
 let velocityX = 0,
   velocityY = 0;
@@ -87,7 +99,7 @@ function requestMotionPermission() {
         permissionButton.style.display = "none";
       } else {
         console.log("Motion permission denied");
-        alert(
+        showTiltWarning(
           "Motion control permission was denied. The tilt feature will not be available."
         );
         permissionButton.style.display = "none";
@@ -280,7 +292,7 @@ if (typeof DeviceOrientationEvent.requestPermission === "function") {
     "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   if (!isTouchDevice) {
-    alert("Tilt feature not supported on desktop devices.");
+    showTiltWarning("Tilt feature not supported on desktop devices.");
   }
 
   window.addEventListener("deviceorientation", handleOrientation);
