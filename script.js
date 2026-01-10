@@ -369,4 +369,86 @@ particlesJS("particles-js", {
   retina_detect: true,
 });
 
-// -----------------------
+// ------- Modal Project Details Population -------
+let projectsData = {};
+
+fetch("data/projects.json")
+  .then((res) => res.json())
+  .then((data) => (projectsData = data));
+
+function getIcon(tech) {
+  const icons = {
+    html: "fa-brands fa-html5",
+    css: "fa-brands fa-css3-alt",
+    javascript: "fa-brands fa-js",
+    bootstrap: "fa-brands fa-bootstrap",
+    php: "fa-brands fa-php",
+    mysql: "fa-solid fa-database",
+    laravel: "fa-brands fa-laravel",
+    blade: "fa-solid fa-layer-group",
+    gsap: "fa-solid fa-wand-magic-sparkles",
+    grapesjs: "fa-solid fa-cubes",
+    "rest api": "fa-solid fa-plug",
+    android: "fa-brands fa-android",
+    java: "fa-brands fa-java",
+  };
+
+  return icons[tech.toLowerCase()] || "fa-solid fa-code";
+}
+
+const projectModal = document.getElementById("projectModal");
+
+projectModal.addEventListener("show.bs.modal", function (event) {
+  const card = event.relatedTarget;
+  const projectKey = card.getAttribute("data-project");
+  const project = projectsData[projectKey];
+
+  if (!project) return;
+
+  // Header Updates
+  document.getElementById("modalAppTitle").textContent = project.title;
+  document.getElementById("modalAppTitleLink").href = project.link || "#";
+
+  // Body Content Updates
+  document.getElementById("modalTitle").textContent = project.title;
+  document.getElementById("modalDescription").textContent = project.description;
+  document.getElementById("modalLink").href = project.link || "#";
+
+  // Tech Icons
+  const techBox = document.getElementById("modalTech");
+  techBox.innerHTML = "";
+  project.tech.forEach((t) => {
+    const i = document.createElement("i");
+    i.className = getIcon(t);
+    i.style.fontSize = "1.3rem";
+    i.title = t; // <-- Added title so hover shows tech name
+    techBox.appendChild(i);
+  });
+
+  // Feature Tags
+  const featuresBox = document.getElementById("modalFeatures");
+  featuresBox.innerHTML = "";
+  if (project.Features) {
+    project.Features.forEach((feature) => {
+      const span = document.createElement("span");
+      span.className = "feature-tag";
+      span.textContent = feature;
+      featuresBox.appendChild(span);
+    });
+  }
+
+  // Preview Handling
+  const preview = document.getElementById("previewContainer");
+  preview.innerHTML = "";
+
+  if (project.link && project.link !== "#") {
+    const iframe = document.createElement("iframe");
+    iframe.src = project.link;
+    iframe.className = "preview-iframe w-100 h-100";
+    iframe.style.border = "none";
+    preview.appendChild(iframe);
+  } else {
+    // Fallback image if no link
+    preview.innerHTML = `<img src="${project.path}" style="width:100%; height:100%; object-fit:contain; display:block; margin:auto;">`;
+  }
+});

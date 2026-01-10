@@ -4,7 +4,7 @@
     "description": "EduCircle is a collaborative platform where students and educators can join groups to study and work together. Users can post and interact in a dynamic newsfeed, authenticate via email, and receive certificates as PDFs through email.",
     "tech": ["HTML", "CSS", "JavaScript", "Bootstrap", "PHP", "MySQL"],
     "link": "https://educircle.online",
-    "path": "assets/project.png",
+    "path": "assets/eduCircle.png",
     "Features": [
       "User Login and Registration",
       "2 Authentication Methods (Email Verification)",
@@ -32,7 +32,7 @@
       "MySQL"
     ],
     "link": "https://kireitours.asia",
-    "path": "assets/project.png",
+    "path": "assets/kireiTours.png",
     "Features": [
       "User Login and Registration (Google and Facebook OAuth)",
       "User Authentication and Authorization",
@@ -41,7 +41,53 @@
       "Payment Gateway Integration(Sandbox)",
       "Calendar Scheduling",
       "Accessibility Features",
-      "GSAP Animations (Simple)"
+      "GSAP Animations (Simple)",
+      "Dynamic Booking System",
+      "Payment Gateway Integration(Sandbox)",
+      "Calendar Scheduling",
+      "Accessibility Features"
+    ]
+  },
+  "keeperlibrary": {
+    "title": "Keeper Library",
+    "description": " Keeper Library is a powerful Content Management System for landing pages that allows users to change templates, edit content, and create pages entirely with GrapesJS—no coding required. It fetches content via APIs and renders pages dynamically, using client-side hydration to ensure all scripts and interactive elements work seamlessly. content, and create pages entirely with GrapesJS—no coding required. It fetches content via APIs and renders pages dynamically, using client-side hydration to ensure all scripts and interactive elements work seamlessly. The admin panel allows for easy management of content while the public website is for rendering the content.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+      "GSAP",
+      "GrapesJS",
+      "PHP",
+      "Laravel",
+      "Blade",
+      "MySQL",
+      "REST API"
+    ],
+    "link": "https://keeperlibrary.online",
+    "path": "assets/keeperLibrary.png",
+    "Features": [
+      "User Login and Registration (Google OAuth)",
+      "User Authentication and Authorization",
+      "Dynamic Content Management",
+      "Sessions Handling",
+      "Content Management System",
+      "GrapesJS Integration",
+      "API Integration"
+    ]
+  },
+  "tindahanPinoyPOS": {
+    "title": "Tindahan Pinoy POS",
+    "description": "Tindahan Pinoy POS is a comprehensive Point of Sale system designed for small businesses. It features inventory management, sales tracking, and customer data handling, all within a user-friendly interface.",
+    "tech": ["Android", "Java", "MySQL", "REST API"],
+    "link": "",
+    "path": "assets/tindahanPOS.png",
+    "Features": [
+      "Inventory Management",
+      "Sales Tracking",
+      "Customer Data Handling",
+      "Reporting and Analytics",
+      "Camera-Based Inventory System"
     ]
   }
 }
