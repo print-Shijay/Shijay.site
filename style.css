@@ -356,11 +356,15 @@ section {
 /* Custom Project Layout */
 .project-card-custom {
   display: flex;
-  align-items: center; /* Centers items vertically */
+  align-items: center;
   padding: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
   background: transparent;
+
+  /* ADD THESE TWO LINES */
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .project-card-custom:hover {
@@ -413,12 +417,76 @@ section {
   line-height: 1.4;
   max-width: 400px; /* Prevents text from stretching too far */
   color: #aaaaaa;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limits text to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
+/* Tech Stack Base Style */
 .tech-stack i {
-  font-size: 1.1rem;
-  margin-right: 12px;
-  color: #777;
+  font-size: 1.6rem;
+  margin: 0 6px;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Hover effect */
+.tech-stack i:hover {
+  transform: scale(1.2);
+}
+
+/* Muted brand colors for grey/black theme */
+.fa-html5 {
+  color: #e07b55; /* muted orange */
+}
+
+.fa-css3-alt {
+  color: #4a90e2; /* muted blue */
+}
+
+.fa-js {
+  color: #e6d96f; /* muted yellow */
+}
+
+.fa-bootstrap {
+  color: #8665b0; /* muted purple */
+}
+
+.fa-php {
+  color: #6f6fbf; /* muted violet */
+}
+
+.fa-laravel {
+  color: #e26a5a; /* muted red */
+}
+
+.fa-database {
+  color: #5b8bc4; /* muted blue for MySQL */
+}
+
+.fa-plug {
+  color: #5aa0e0; /* muted blue for API */
+}
+
+.fa-wand-magic-sparkles {
+  color: #8ed17b; /* muted green for GSAP */
+}
+
+.fa-cubes {
+  color: #a0a0a0; /* medium grey for GrapesJS */
+}
+
+.fa-layer-group {
+  color: #e1b978; /* muted orange for Blade */
+}
+
+.fa-android {
+  color: #5fb88b; /* muted green */
+}
+
+.fa-java {
+  color: #5b99b0; /* muted blue */
 }
 
 /* Interaction: Divider glows on hover */
@@ -427,31 +495,95 @@ section {
 }
 
 /* --- End of Project --- */
-/* Dark Modal Base */
+/* Modal Core Container */
 .project-modal-dark {
   background-color: #000 !important;
-  border: 1px solid #333; /* Very subtle border */
-  border-radius: 0px; /* Sharp edges for minimalist feel */
-  height: 80vh;
+  border: 1px solid #333;
+  border-radius: 12px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-/* Vertical Line / Preview Pane */
-.preview-pane {
-  border-left: 1px solid #ffe066; /* Thin, elegant yellow line */
-  background-color: #080808;
-  position: relative;
+/* macOS Header Styling */
+.mac-header {
+  height: 42px;
+  background: #2e2e2e;
+  border-bottom: 1px solid #222;
+  z-index: 10;
 }
 
-/* Custom Button */
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+
+.dot.red {
+  background: #ff5f56;
+  cursor: pointer;
+  position: relative;
+}
+.dot.yellow {
+  background: #ffbd2e;
+  cursor: default;
+}
+.dot.green {
+  background: #27c93f;
+  cursor: default;
+}
+
+.dot.red:hover::after {
+  content: "×";
+  color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #666;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.header-link:hover {
+  color: #ffe066;
+}
+
+/* Right Side Preview Pane */
+.preview-pane {
+  border-left: 1px solid #ffe066;
+  background-color: #000;
+  position: relative;
+  height: 80vh;
+}
+
+.preview-iframe {
+  border: none;
+  background: #fff;
+  filter: grayscale(20%);
+}
+
+/* Typography & Links */
 .btn-minimal {
   color: #ffe066;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 1px;
   border-bottom: 2px solid #ffe066;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
   transition: all 0.3s ease;
 }
 
@@ -467,42 +599,8 @@ section {
 }
 
 #modalTech i:hover {
-  color: #ffe066;
+  /* color: #ffe066; */
   transform: translateY(-3px);
-}
-
-/* Custom Close Button */
-.btn-close-custom {
-  position: absolute;
-  bottom: 40px;
-  left: 50px;
-  background: none;
-  border: none;
-  color: #555;
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  padding: 0;
-  cursor: pointer;
-}
-
-.btn-close-custom:hover {
-  color: #ffe066;
-}
-
-/* iframe styling */
-.preview-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  filter: grayscale(
-    20%
-  ); /* Optional: mutes colors slightly to match dark theme */
-}
-
-.preview-img-fallback {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 /* Feature Tag Styling */
@@ -511,8 +609,7 @@ section {
   color: #cdcdcd;
   border: 1px solid #333;
   padding: 5px 12px;
-  border-radius: 4px; /* Slight roundness for a modern feel */
-  background: transparent;
+  border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
@@ -523,121 +620,22 @@ section {
   color: #ffe066;
 }
 
-/* Modal and Layout Defaults */
-.project-modal-dark {
-  background-color: #2e2e2e !important;
-  border: none;
+/* Make the left content area scrollable */
+.modal-content-scrollable {
+  overflow-y: auto;
+  max-height: calc(85vh - 42px); /* Subtracts the macOS header height */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #333 transparent;
+}
+
+/* Optional: Style the scrollbar for Chrome/Safari/Edge to keep it dark */
+.modal-content-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content-scrollable::-webkit-scrollbar-thumb {
+  background-color: #333;
   border-radius: 10px;
-  height: 85vh;
-}
-
-.preview-pane {
-  border-left: 1px solid #ffe066;
-  background-color: #080808;
-}
-
-.btn-minimal {
-  color: #ffe066;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.85rem;
-  border-bottom: 2px solid #ffe066;
-  padding-bottom: 4px;
-}
-
-.btn-close-custom {
-  position: absolute;
-  bottom: 30px;
-  left: 50px;
-  background: none;
-  border: none;
-  color: #555;
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-}
-
-/* Application Header Styling */
-.mac-header {
-  height: 42px;
-  background: #2e2e2e;
-  border-bottom: 1px solid #222;
-  z-index: 10;
-}
-
-.dot {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer; /* Indicates they are functional */
-  transition: opacity 0.2s;
-}
-
-.dot:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.red {
-  background: #ff5f56;
-  position: relative;
-}
-/* Adding an 'x' on hover like real macOS */
-.red:hover::after {
-  content: "×";
-  color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.yellow {
-  background: #ffbd2e;
-  cursor: default;
-}
-.green {
-  background: #27c93f;
-  cursor: default;
-}
-
-.header-link {
-  text-decoration: none;
-  color: #666; /* Muted gray by default */
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.header-link:hover {
-  color: #ffe066; /* Your main color on hover */
-}
-
-/* Modal Core */
-.project-modal-dark {
-  background-color: #000 !important;
-  border: 1px solid #333;
-  border-radius: 12px;
-  height: 85vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.preview-pane {
-  border-left: 1px solid #ffe066;
-  background-color: #000;
-}
-
-.preview-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: #fff;
 }
 /* --- Responsive Breakpoints --- */
 
