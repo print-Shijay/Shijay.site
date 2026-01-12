@@ -680,64 +680,99 @@
         position: fixed;
         right: 24px;
         bottom: 24px;
-        max-width: 350px;
+        max-width: 360px;
         z-index: 1080;
         display: none;
-        background-color: #dddddd;
-        border: none;
-        border-left: 6px solid #ffe066; /* Your yellow color */
-        border-radius: 8px;
-        padding: 20px;
-        color: #333;
+
+        background: rgba(255, 224, 102, 0.18);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        border: 1px solid rgba(255, 224, 102, 0.35);
+        border-left: 6px solid #ffe066;
+        border-radius: 14px;
+
+        padding: 20px 22px;
+        color: #ffffff;
         font-family: Arial, Helvetica, sans-serif;
       "
     >
-      <div class="d-flex align-items-start">
+      <div class="d-flex align-items-start gap-3">
+        <!-- Main warning icon -->
         <div
           style="
-            color: #ffe066;
-            font-size: 1.5rem;
-            margin-right: 15px;
+            font-size: 2rem;
             line-height: 1;
+            color: #ffe066;
+            text-shadow: 0 0 12px rgba(255, 224, 102, 0.6);
           "
         >
-          <i class="bi bi-exclamation-triangle-fill"></i> ⚠️
+          <i class="fa-solid fa-triangle-exclamation"></i>
         </div>
 
         <div style="flex: 1">
+          <!-- Title -->
           <strong
             style="
-              display: block;
-              font-size: 1rem;
-              color: #444;
-              margin-bottom: 4px;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              font-size: 1.05rem;
+              margin-bottom: 6px;
+              color: #ffe066;
             "
           >
             Tilt Unavailable
+            <i
+              class="fa-solid fa-shield-exclamation"
+              style="font-size: 0.95rem; opacity: 0.9"
+            ></i>
           </strong>
+
+          <!-- Message -->
           <div
             id="tiltWarningMessage"
-            style="font-size: 0.875rem; color: #666; line-height: 1.4"
+            style="
+              font-size: 0.9rem;
+              color: rgba(255, 255, 255, 0.92);
+              line-height: 1.45;
+              margin-bottom: 10px;
+            "
           >
-            Device orientation is not supported on this browser.
+            Device orientation is not supported on this browser or device.
+          </div>
+
+          <!-- Extra info -->
+          <div
+            style="
+              display: flex;
+              gap: 12px;
+              font-size: 0.78rem;
+              color: rgba(255, 255, 255, 0.85);
+            "
+          >
+            <div>
+              <i class="fa-solid fa-mobile-screen" style="color: #ffe066"></i>
+              Mobile only
+            </div>
+            <div>
+              <i class="fa-solid fa-rotate" style="color: #ffe066"></i>
+              Motion access required
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Close button -->
       <button
         type="button"
-        class="btn-close"
+        class="btn-close btn-close-white"
         data-bs-dismiss="alert"
         aria-label="Close"
-        style="
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          font-size: 0.75rem;
-          filter: grayscale(1) opacity(0.5);
-        "
+        style="position: absolute; top: 12px; right: 12px; opacity: 0.85"
       ></button>
 
+      <!-- Bottom warning glow -->
       <div
         style="
           position: absolute;
@@ -745,9 +780,12 @@
           left: 0;
           height: 3px;
           width: 100%;
-          background: #cdcdcd;
-          opacity: 0.3;
-          border-radius: 0 0 0 8px;
+          background: linear-gradient(
+            to right,
+            rgba(255, 224, 102, 0.9),
+            rgba(255, 224, 102, 0.2)
+          );
+          border-radius: 0 0 14px 14px;
         "
       ></div>
     </div>
